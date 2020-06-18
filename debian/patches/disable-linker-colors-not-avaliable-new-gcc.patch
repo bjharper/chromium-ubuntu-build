@@ -1,0 +1,56 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ chromium-browser (84.0.4147.30-0ubuntu1~ppa1~20.04.1) focal; urgency=low
+ .
+   * Bump version to 84.0.4147.30
+Author: Brad Harper <bjharper@gmail.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2020-06-17
+
+--- chromium-browser-84.0.4147.30.orig/build/config/compiler/BUILD.gn
++++ chromium-browser-84.0.4147.30/build/config/compiler/BUILD.gn
+@@ -442,8 +442,6 @@ config("compiler") {
+   # Clang-specific compiler flags setup.
+   # ------------------------------------
+   if (is_clang) {
+-    cflags += [ "-fcolor-diagnostics" ]
+-
+     # Enable -fmerge-all-constants. This used to be the default in clang
+     # for over a decade. It makes clang non-conforming, but is fairly safe
+     # in practice and saves some binary size. We might want to consider
+@@ -453,19 +451,6 @@ config("compiler") {
+     cflags += [ "-fmerge-all-constants" ]
+   }
+ 
+-  if (use_lld) {
+-    # TODO(thakis): Make the driver pass --color-diagnostics to the linker
+-    # if -fcolor-diagnostics is passed to it, and pass -fcolor-diagnostics
+-    # in ldflags instead.
+-    if (is_win) {
+-      # On Windows, we call the linker directly, instead of calling it through
+-      # the driver.
+-      ldflags += [ "--color-diagnostics" ]
+-    } else {
+-      ldflags += [ "-Wl,--color-diagnostics" ]
+-    }
+-  }
+-
+   # Enable text section splitting only on linux when using lld for now. Other
+   # platforms can be added later if needed.
+   if (is_linux && use_lld && use_text_section_splitting) {

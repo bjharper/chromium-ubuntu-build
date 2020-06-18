@@ -1,5 +1,5 @@
 #gyp-make-generator-reenabled
-title-bar-default-system.patch-v35
+#title-bar-default-system.patch-v35
 #third-party-cookies-off-by-default.patch
 search-credit.patch
 chromium_useragent.patch
@@ -33,7 +33,7 @@ enable-chromecast-by-default.patch
 revert-Xclang-instcombine-lower-dbg-declare.patch
 suppress-newer-clang-warning-flags.patch
 fix-ffmpeg-build.patch
-fix-build-on-older-gcc.patch
+#fix-build-on-older-gcc.patch
 #gn-remove-sysroot-use.patch
 widevine-allow-on-linux.patch
 set-rpath-on-chromium-executables.patch
@@ -46,3 +46,10 @@ dont-run-code-formatting.patch
 gn-link-with-libc.patch
 fix-build-errors.patch
 rename-python-to-python2.patch
+chromium-84-gcc-template.patch
+ignore-assert-atk.patch
+gcc-noexpect.patch
+attempt-fix-no-lld.patch
+disable-icf-all-link-option.patch
+gen-xproto-use-python3.patch
+disable-linker-colors-not-avaliable-new-gcc.patch

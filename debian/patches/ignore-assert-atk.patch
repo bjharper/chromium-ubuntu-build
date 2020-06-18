@@ -1,0 +1,19 @@
+Description: Ignore assert error when building for arm64 linux
+ .
+ chromium-browser (84.0.4147.30-0ubuntu1~ppa1~20.04.1) focal; urgency=low
+ .
+   * New upstream version 84.0.4147.30.
+Author: Brad Harper <bjharper@gmail.com>
+
+---
+--- chromium-browser-84.0.4147.30.orig/build/config/linux/atk/BUILD.gn
++++ chromium-browser-84.0.4147.30/build/config/linux/atk/BUILD.gn
+@@ -10,7 +10,7 @@ import("//build/config/ui.gni")
+ assert(!is_chromeos)
+ 
+ # These packages should _only_ be expected when building for a target.
+-assert(current_toolchain == default_toolchain)
++# assert(current_toolchain == default_toolchain)
+ 
+ if (use_atk) {
+   assert(use_glib, "use_atk=true requires that use_glib=true")

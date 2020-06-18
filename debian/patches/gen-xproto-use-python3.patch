@@ -1,0 +1,18 @@
+Description: For testing only attempt to use python3 for xcb proto generation
+ .
+ chromium-browser (84.0.4147.30-0ubuntu1~ppa1~20.04.1) focal; urgency=low
+
+Author: Brad Harper <bjharper@gmail.com>
+
+---
+--- chromium-browser-84.0.4147.30.orig/ui/gfx/x/gen_xproto.py
++++ chromium-browser-84.0.4147.30/ui/gfx/x/gen_xproto.py
+@@ -1015,7 +1015,7 @@ def main():
+     args = parser.parse_args()
+ 
+     if args.sysroot:
+-        path = os.path.join(args.sysroot, 'usr', 'lib', 'python2.7',
++        path = os.path.join(args.sysroot, 'usr', 'lib', 'python3',
+                             'dist-packages')
+         sys.path.insert(1, path)
+ 

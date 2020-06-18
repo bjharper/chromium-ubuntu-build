@@ -1,37 +1,37 @@
-Index: dev/tools/gn/bootstrap/bootstrap.py
+Index: chromium-84.0.4147.30/tools/gn/bootstrap/bootstrap.py
 ===================================================================
---- dev.orig/tools/gn/bootstrap/bootstrap.py
-+++ dev/tools/gn/bootstrap/bootstrap.py
+--- chromium-84.0.4147.30.orig/tools/gn/bootstrap/bootstrap.py
++++ chromium-84.0.4147.30/tools/gn/bootstrap/bootstrap.py
 @@ -1,4 +1,4 @@
 -#!/usr/bin/env python
 +#!/usr/bin/env python3
  # Copyright 2014 The Chromium Authors. All rights reserved.
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
-Index: dev/tools/generate_stubs/generate_stubs.py
+Index: chromium-84.0.4147.30/tools/generate_stubs/generate_stubs.py
 ===================================================================
---- dev.orig/tools/generate_stubs/generate_stubs.py
-+++ dev/tools/generate_stubs/generate_stubs.py
+--- chromium-84.0.4147.30.orig/tools/generate_stubs/generate_stubs.py
++++ chromium-84.0.4147.30/tools/generate_stubs/generate_stubs.py
 @@ -1,4 +1,4 @@
 -#!/usr/bin/env python
 +#!/usr/bin/env python3
  # Copyright (c) 2012 The Chromium Authors. All rights reserved.
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
-Index: dev/tools/gn/build/gen.py
+Index: chromium-84.0.4147.30/tools/gn/build/gen.py
 ===================================================================
---- dev.orig/tools/gn/build/gen.py
-+++ dev/tools/gn/build/gen.py
+--- chromium-84.0.4147.30.orig/tools/gn/build/gen.py
++++ chromium-84.0.4147.30/tools/gn/build/gen.py
 @@ -1,4 +1,4 @@
 -#!/usr/bin/env python
 +#!/usr/bin/env python3
  # Copyright 2014 The Chromium Authors. All rights reserved.
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
-Index: dev/tools/gn/src/gn/setup.cc
+Index: chromium-84.0.4147.30/tools/gn/src/gn/setup.cc
 ===================================================================
---- dev.orig/tools/gn/src/gn/setup.cc
-+++ dev/tools/gn/src/gn/setup.cc
+--- chromium-84.0.4147.30.orig/tools/gn/src/gn/setup.cc
++++ chromium-84.0.4147.30/tools/gn/src/gn/setup.cc
 @@ -717,7 +717,7 @@ bool Setup::FillPythonPath(const base::C
      }
      build_settings_.set_python_path(python_path.NormalizePathSeparatorsTo('/'));
@@ -41,20 +41,20 @@ Index: dev/tools/gn/src/gn/setup.cc
  #endif
    }
    return true;
-Index: dev/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
+Index: chromium-84.0.4147.30/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
 ===================================================================
---- dev.orig/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
-+++ dev/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
+--- chromium-84.0.4147.30.orig/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
++++ chromium-84.0.4147.30/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
 @@ -1,4 +1,4 @@
 -#!/usr/bin/env python
 +#!/usr/bin/env python2
  # Copyright 2016 The Chromium Authors. All rights reserved.
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
-Index: dev/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
+Index: chromium-84.0.4147.30/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
 ===================================================================
---- dev.orig/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
-+++ dev/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
+--- chromium-84.0.4147.30.orig/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
++++ chromium-84.0.4147.30/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
 @@ -83,7 +83,7 @@ def _MinifyJS(input_js):
  
    with tempfile.NamedTemporaryFile() as _:
@@ -73,10 +73,10 @@ Index: dev/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
      p = subprocess.Popen(rcssmin_args,
                           stdin=subprocess.PIPE,
                           stdout=subprocess.PIPE,
-Index: dev/ui/gfx/x/gen_xproto.py
+Index: chromium-84.0.4147.30/ui/gfx/x/gen_xproto.py
 ===================================================================
---- dev.orig/ui/gfx/x/gen_xproto.py
-+++ dev/ui/gfx/x/gen_xproto.py
+--- chromium-84.0.4147.30.orig/ui/gfx/x/gen_xproto.py
++++ chromium-84.0.4147.30/ui/gfx/x/gen_xproto.py
 @@ -173,6 +173,8 @@ import re
  import sys
  import types
@@ -86,7 +86,7 @@ Index: dev/ui/gfx/x/gen_xproto.py
  # __main__.output must be defined before importing xcbgen,
  # so this global is unavoidable.
  output = collections.defaultdict(int)
-@@ -852,7 +854,7 @@ class GenXproto:
+@@ -848,7 +850,7 @@ class GenXproto:
  
          self.resolve_element(t.elt, fields)
  
@@ -94,8 +94,8 @@ Index: dev/ui/gfx/x/gen_xproto.py
 +        for field in list(fields.values()):
              field.parent = t
              field.for_list = None
-             if field.type.is_switch or (field.type.is_case_or_bitcase if hasattr(field.type, 'is_case_or_bitcase') else field.type.is_bitcase):
-@@ -923,11 +925,13 @@ class GenXproto:
+             if field.type.is_switch or field.type.is_case_or_bitcase:
+@@ -919,11 +921,13 @@ class GenXproto:
                  return 3
              return 2
  
@@ -111,7 +111,7 @@ Index: dev/ui/gfx/x/gen_xproto.py
  
      def gen_header(self):
          self.file = self.args.headerfile
-@@ -1019,8 +1023,14 @@ def main():
+@@ -1015,8 +1019,14 @@ def main():
                              'dist-packages')
          sys.path.insert(1, path)
  

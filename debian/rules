@@ -8,8 +8,44 @@ DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()' | sed -e 's/\#/ /g')
 DEBIAN_DIST_NAME	:= $(shell lsb_release -si | sed -e 's/\#/ /g')
 DEBIAN_DIST_VERSION	:= $(shell lsb_release -sr | sed -e 's/\#/ /g')
 
-DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
-DEB_HOST_ARCH_CPU ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
+DEB_BUILD_ARCH=amd64
+DEB_BUILD_ARCH_ABI=base
+DEB_BUILD_ARCH_BITS=64
+DEB_BUILD_ARCH_CPU=amd64
+DEB_BUILD_ARCH_ENDIAN=little
+DEB_BUILD_ARCH_LIBC=gnu
+DEB_BUILD_ARCH_OS=linux
+DEB_BUILD_GNU_CPU=x86_64
+DEB_BUILD_GNU_SYSTEM=linux-gnu
+DEB_BUILD_GNU_TYPE=x86_64-linux-gnu
+DEB_BUILD_MULTIARCH=x86_64-linux-gnu
+DEB_HOST_ARCH=arm64
+DEB_HOST_ARCH_ABI=base
+DEB_HOST_ARCH_BITS=64
+DEB_HOST_ARCH_CPU=arm64
+DEB_HOST_ARCH_ENDIAN=little
+DEB_HOST_ARCH_LIBC=gnu
+DEB_HOST_ARCH_OS=linux
+DEB_HOST_GNU_CPU=aarch64
+DEB_HOST_GNU_SYSTEM=linux-gnu
+DEB_HOST_GNU_TYPE=aarch64-linux-gnu
+DEB_HOST_MULTIARCH=aarch64-linux-gnu
+DEB_TARGET_ARCH=arm64
+DEB_TARGET_ARCH_ABI=base
+DEB_TARGET_ARCH_BITS=64
+DEB_TARGET_ARCH_CPU=arm64
+DEB_TARGET_ARCH_ENDIAN=little
+DEB_TARGET_ARCH_LIBC=gnu
+DEB_TARGET_ARCH_OS=linux
+DEB_TARGET_GNU_CPU=aarch64
+DEB_TARGET_GNU_SYSTEM=linux-gnu
+DEB_TARGET_GNU_TYPE=aarch64-linux-gnu
+DEB_TARGET_MULTIARCH=aarch64-linux-gnu
+
+#DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_ARCH := arm64
+#DEB_HOST_ARCH_CPU ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
+DEB_HOST_ARCH_CPU := arm64
 DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 DEB_BUILD_ARCH_BITS ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH_BITS)
 
@@ -35,7 +71,7 @@ ifneq (,$(findstring Debian,$(DEBIAN_DIST)))
 DISTRIBUTION=DEBIAN
 endif
 
-WANT_OZONE       := 0
+WANT_OZONE       := 1
 
 common_defines :=
 browser_defines :=
@@ -50,15 +86,11 @@ common_defines += \
 				enable_mdns=true \
 				enable_nacl=false \
 				enable_vr=false \
-				enable_wayland_server=false \
+				enable_wayland_server=true \
 				enable_widevine=true \
-				fieldtrial_testing_like_official_build=true \
 				is_component_ffmpeg=true \
-				is_debug=false \
 				is_desktop_linux=true \
-				linux_use_bundled_binutils=false \
 				link_pulseaudio=true \
-				blink_symbol_level=0 \
 				treat_warnings_as_errors=false \
 				use_allocator="none" \
 				use_alsa=true \
@@ -68,26 +100,46 @@ common_defines += \
 				use_custom_libcxx=true \
 				use_dbus=true \
 				use_gio=true \
-				use_glib=true \
 				use_gnome_keyring=false \
-				use_gold=true \
 				use_libpci=true \
 				use_pulseaudio=true \
 				use_sysroot=false \
 				use_system_harfbuzz=false \
-				use_system_libjpeg=false \
-				rtc_enable_protobuf=false \
+				use_system_libjpeg=true \
+				rtc_enable_protobuf=true \
 				is_clang=true \
 				clang_base_path="/usr" \
-				clang_use_chrome_plugins=false \
-				use_lld=false \
 				is_cfi=false \
 				use_thin_lto=false \
 				fatal_linker_warnings=false \
 				target_os="linux" \
 				current_os="linux" \
+				target_cpu="arm64" \
 				optimize_webui=false \
-				force_local_build_id=true
+				force_local_build_id=true \
+				use_gold=true \
+				ozone_platform="wayland" \
+                                ozone_platform_wayland=true \
+                                ozone_platform_gbm=false \
+				ozone_platform_cast=false \
+				ozone_platform_gbm=false \
+				ozone_platform_headless=false \
+				ozone_platform_scenic=false \
+				ozone_platform_windows=false \
+				ozone_platform_x11=true \
+				ozone_auto_platforms=false \
+                                rtc_use_h264=true \
+                                use_ozone=true \
+				use_system_minigbm=true \
+				rtc_use_h264=true \
+				use_v4l2_codec_aml=true \
+				clang_use_chrome_plugins=false \
+				use_system_libdrm=true \
+				use_xkbcommon=true \
+				use_glib=true \
+				use_gtk=true \
+
+
 
 # FFmpeg-mt
 # Ignore the version built as part of chromium. Build it separately twice, once with
@@ -115,12 +167,7 @@ common_defines += arm_float_abi="hard" arm_use_thumb=true
 else ifeq (arm64,$(DEB_HOST_ARCH))
 common_defines += target_cpu="arm64" symbol_level=1
 else ifeq (i386,$(DEB_HOST_ARCH))
-ifeq (,$(filter 16.04%,$(UBUNTU_DIST)))
 common_defines += target_cpu="x86" symbol_level=1
-else
-# Ubuntu 16.04 i386 needs too much memory for even symbol_level=1
-common_defines += target_cpu="x86" symbol_level=0
-endif
 else ifeq (amd64,$(DEB_HOST_ARCH))
 common_defines += target_cpu="x64" symbol_level=1
 else ifeq (mipsel,$(DEB_HOST_ARCH))

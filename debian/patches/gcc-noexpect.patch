@@ -1,0 +1,38 @@
+Description: gcc noexpect patch for building with gcc
+ .
+ chromium-browser (84.0.4147.30-0ubuntu1~ppa1~20.04.1) focal; urgency=low
+ .
+Author: Brad Harper <bjharper@gmail.com>
+
+---
+Index: chromium-84.0.4147.30/ui/color/color_set.cc
+===================================================================
+--- chromium-84.0.4147.30.orig/ui/color/color_set.cc
++++ chromium-84.0.4147.30/ui/color/color_set.cc
+@@ -9,9 +9,9 @@ namespace ui {
+ ColorSet::ColorSet(ColorSetId id, ColorMap&& colors)
+     : id(id), colors(std::move(colors)) {}
+ 
+-ColorSet::ColorSet(ColorSet&&) noexcept = default;
++ColorSet::ColorSet(ColorSet&&) = default;
+ 
+-ColorSet& ColorSet::operator=(ColorSet&&) noexcept = default;
++ColorSet& ColorSet::operator=(ColorSet&&) = default;
+ 
+ ColorSet::~ColorSet() = default;
+ 
+Index: chromium-84.0.4147.30/ui/color/color_set.h
+===================================================================
+--- chromium-84.0.4147.30.orig/ui/color/color_set.h
++++ chromium-84.0.4147.30/ui/color/color_set.h
+@@ -28,8 +28,8 @@ struct COMPONENT_EXPORT(COLOR) ColorSet
+   using ColorMap = base::flat_map<ColorId, SkColor>;
+ 
+   ColorSet(ColorSetId id, ColorMap&& colors);
+-  ColorSet(ColorSet&&) noexcept;
+-  ColorSet& operator=(ColorSet&&) noexcept;
++  ColorSet(ColorSet&&);
++  ColorSet& operator=(ColorSet&&);
+   ~ColorSet();
+ 
+   ColorSetId id;
