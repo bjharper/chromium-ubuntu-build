@@ -88,9 +88,12 @@ common_defines += \
 				enable_vr=false \
 				enable_wayland_server=true \
 				enable_widevine=true \
+				fieldtrial_testing_like_official_build=true \
 				is_component_ffmpeg=true \
+				is_debug=false \
 				is_desktop_linux=true \
 				link_pulseaudio=true \
+				blink_symbol_level=0 \
 				treat_warnings_as_errors=false \
 				use_allocator="none" \
 				use_alsa=true \
@@ -115,6 +118,7 @@ common_defines += \
 				target_os="linux" \
 				current_os="linux" \
 				target_cpu="arm64" \
+				v8_target_cpu="arm64" \
 				optimize_webui=false \
 				force_local_build_id=true \
 				use_gold=true \
@@ -131,13 +135,13 @@ common_defines += \
                                 rtc_use_h264=true \
                                 use_ozone=true \
 				use_system_minigbm=true \
-				rtc_use_h264=true \
 				use_v4l2_codec_aml=true \
 				clang_use_chrome_plugins=false \
 				use_system_libdrm=true \
 				use_xkbcommon=true \
 				use_glib=true \
 				use_gtk=true \
+				symbol_level=1 \
 
 
 
