@@ -1,0 +1,33 @@
+Description: remove-icf-none-option-from-v8-context_snapshot-clang-10.patch
+ Temporarily disable icf=none options for v8_context_snapshot build as it is not supported 
+ with gold linker being used for initial testing.
+ .
+ chromium-browser (84.0.4147.30-0ubuntu1~ppa1~20.04.1) focal; urgency=low
+ .
+   * Bump version to 84.0.4147.30
+Author: Brad Harper <bjharper@gmail.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2020-06-21
+
+--- chromium-browser-84.0.4147.30.orig/tools/v8_context_snapshot/BUILD.gn
++++ chromium-browser-84.0.4147.30/tools/v8_context_snapshot/BUILD.gn
+@@ -84,8 +84,6 @@ if (use_v8_context_snapshot) {
+     visibility = [ ":*" ]  # Only targets in this file can depend on this.
+     if (is_win) {
+       ldflags = [ "/OPT:NOICF" ]  # link.exe, but also lld-link.exe.
+-    } else if (use_gold || use_lld) {
+-      ldflags = [ "-Wl,--icf=none" ]
+     }
+   }
+ 

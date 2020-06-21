@@ -53,3 +53,4 @@ attempt-fix-no-lld.patch
 disable-icf-all-link-option.patch
 gen-xproto-use-python3.patch
 disable-linker-colors-not-avaliable-new-gcc.patch
+remove-icf-none-option-from-v8-context_snapshot-clang-10.patch
